@@ -183,6 +183,7 @@ JTAG（IEEE 1149.1）标准最初用于边界扫描测试（Boundary Scan Test, 
 	![ ](./media/image28.jpeg " ")
 	
 1.  **`J` - 基础 JTAG 扫描**
+
 	![ ](./media/image30.png " ")
     - 最通用的扫描方法，通过穷举可能的引脚排列组合，尝试建立 JTAG 通信。
     - 操作流程：
