@@ -174,7 +174,9 @@ picocom -b 115200 /dev/ttyUSB0
 ## 0x06 JTAG 接口嗅探与调试
 
 JTAG（IEEE 1149.1）标准最初用于边界扫描测试（Boundary Scan Test, BST），现已广泛用于芯片调试、编程和逆向工程。其核心是一个由 **TMS** 信号控制的状态机，通过 **TCK** 时钟同步，在 **TDI** 和 **TDO** 线上进行数据交换。可选信号 **TRST#** 用于异步复位JTAG状态机。
+
 ![ ](./media/image26.jpeg " ")
+
 输入 `J` 进入 JTAG 模式，输入 `H` 查看指令。
 
 ![ ](./media/image27.png " ")
