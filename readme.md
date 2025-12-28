@@ -154,7 +154,7 @@ picocom -b 115200 /dev/ttyUSB0
     - 向指定通道输出高低电平。
     - 需要输入一个6位的十六进制数（如 `FFFFFF`），对应24个通道（24 bits）。从最低位（bit 0）对应 CH0，最高位（bit 23）对应 CH23。
 	
-	![ ](./media/image24.png " ")
+	   ![ ](./media/image24.png " ")
     - **示例**：欲使 CH2 输出低电平（0），其余为高电平（1），则二进制为 `11111111 11111111 11111011`，转换为十六进制为 `FFFFFB`。
 
 4.  **`L` - 逻辑分析仪模式**
@@ -166,7 +166,7 @@ picocom -b 115200 /dev/ttyUSB0
             2.  选择驱动：`Demo Device` -> `Openbench Logic Sniffer & SUMP compatible (ols)`
             3.  选择端口：Jtagulator 对应的串口（如 `/dev/ttyUSB0`），波特率 `115200`。
             4.  点击 `Scan for devices using the driver above`，应识别出 `JTAGulator with 24 channels`。
-			![ ](./media/image25.png " ")
+		![ ](./media/image25.png " ")
         - **注意**：由于设备内部缓冲区有限，此模式适合捕捉低频或短时突发信号，用于初步判断引脚活动。
 
 ---
@@ -176,11 +176,14 @@ picocom -b 115200 /dev/ttyUSB0
 JTAG（IEEE 1149.1）标准最初用于边界扫描测试（Boundary Scan Test, BST），现已广泛用于芯片调试、编程和逆向工程。其核心是一个由 **TMS** 信号控制的状态机，通过 **TCK** 时钟同步，在 **TDI** 和 **TDO** 线上进行数据交换。可选信号 **TRST#** 用于异步复位JTAG状态机。
 ![ ](./media/image26.jpeg " ")
 输入 `J` 进入 JTAG 模式，输入 `H` 查看指令。
+
 ![ ](./media/image27.png " ")
+
 ### 扫描指令详解
-![ ](./media/image28.jpeg " ")
+	![ ](./media/image28.jpeg " ")
+	
 1.  **`J` - 基础 JTAG 扫描**
-![ ](./media/image30.png " ")
+	![ ](./media/image30.png " ")
     - 最通用的扫描方法，通过穷举可能的引脚排列组合，尝试建立 JTAG 通信。
     - 操作流程：
         1.  设置开始通道和结束通道（建议将目标板引脚集中连接到连续的通道上，以减少组合数）。
@@ -188,13 +191,14 @@ JTAG（IEEE 1149.1）标准最初用于边界扫描测试（Boundary Scan Test, 
     - 本质是发送一系列 JTAG 指令序列，观察 TDO 是否有符合预期的响应。
 
 2.  **`I` - IDCODE 扫描**
-![ ](./media/image32.png " ")
+	![ ](./media/image32.png " ")
     - 专门扫描能读出 `IDCODE` 的 JTAG 接口。`IDCODE` 是 JTAG 标准中一个必选的设备标识寄存器。
     - **成功标志**：当扫描到正确的引脚组合时，会显示一个或多个32位的 `IDCODE` 值。
     - **增强固件功能**：使用 `jtagulator-ID-Tracker` 固件，会直接在 `IDCODE` 旁显示芯片制造商名称。
 
 3.  **`B` - BYPASS 扫描**
-![ ](./media/image33.png " ")
+
+	![ ](./media/image33.png " ")
     - 尝试将链路上的所有芯片置于 `BYPASS` 模式。在此模式下，每个芯片仅作为一个1位移位寄存器。
     - **用途**：可用于判断 JTAG 链路上串联的芯片数量（通过移位数据的延迟）。
 
